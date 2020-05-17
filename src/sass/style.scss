@@ -6,11 +6,98 @@ $theme-colors: (
 @import "node_modules/bootstrap/scss/bootstrap";
 
 body {
-    padding-top:56px;
+    background-color: #2957AE;
+    padding: 73.5px 67px 103px 67px;
 }
-.footer {
-    margin-top:3rem;
+
+section#section-header{
+    background-color: #223E73;
+
 }
-.navbar {
-    border-bottom:1px solid #eee;
+section#plan{
+    background-color: #2B7EEC;
 }
+// Mixin to place items on a circle
+// @author Hugo Giraudel
+// @author Ana Tudor
+// @param {Integer} $item-count - Number of items on the circle
+// @param {Length} $circle-size - Large circle size
+// @param {Length} $item-size - Single item size
+@mixin on-circle($item-count, $circle-size, $item-size) {
+    position: relative;
+    width:  $circle-size;
+    height: $circle-size;
+    padding: 0;
+    border-radius: 50%; 
+    list-style: none;       
+    
+    > * {
+      display: block;
+      position: absolute;
+      top:  50%; 
+      left: 50%;
+      width:  $item-size;
+      height: $item-size;
+      margin: -($item-size / 2);
+    
+      $angle: (360 / $item-count);
+      $rot: 270;
+  
+      @for $i from 1 through $item-count {
+        &:nth-of-type(#{$i}) {
+          transform: 
+            rotate($rot * 1deg) 
+            translate($circle-size / 2) 
+            rotate($rot * -1deg);
+        }
+  
+        $rot: $rot + $angle;
+      }
+    }
+  }
+  .circle-container {
+    @include on-circle($item-count: 3, $circle-size: 500px, $item-size: 233px); 
+    margin: 25em auto 0;
+    border: dashed 2px white;
+    
+    li{
+        background-color: #223E73;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        img{
+            margin-top: 33px;
+        }
+    }
+    // img { 
+    //   display: block; 
+    //   max-width: 100%; 
+    //   border-radius: 50%;
+    //   filter: grayscale(100%);
+    // //   border: solid 5px tomato;
+    //   transition: .15s;
+      
+    //   &:hover,
+    //   &:active {
+    //     filter: grayscale(0);
+    //   }
+    // }
+  }
+  section#testimonials{
+      padding-top: 174px;
+      .section-header{
+          text-align: center;
+          p{
+              border: 2px solid #2B7EEC;
+              display: inline-block;
+              color: #fff;
+              width: 249px;
+              padding: 0px 40px;
+              font-size: 20px;
+          }
+      }
+  }
+
